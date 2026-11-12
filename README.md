@@ -16,12 +16,12 @@ pip install git+https://github.com/jcapecci09/DirTree.git
 dirtree --help
 ```
 
-3. Run tool
+### 3. Run tool
 ```bash 
 dirtree
 ```
 
-4. Use command flags
+### 4. Use command flags
 ```bash
 dirtree -i src -o dir2.txt --print
 ```
