@@ -147,15 +147,17 @@ def main():
     structure = get_directory_structure(cwd, max_depth=args.depth, show_hidden=args.show_hidden)
 
     # Write cwd to output
-    with open(args.output, 'w') as f:
-        f.write(f'📁 {cwd.name}/\n')
+    if not args.print:
+        with open(args.output, 'w') as f:
+            f.write(f'📁 {cwd.name}/\n')
 
     # Print the directory structure to the terminal, starting at indentation level 1
     if args.print:
         print_directory_structure(structure, indent=1)
 
     # Write the directory structure to output
-    write_directory_structure(structure, args.output, indent=1)
+    if not args.print:
+        write_directory_structure(structure, args.output, indent=1)
 
 
 # Execute main() only when this script is run directly
