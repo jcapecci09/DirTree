@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dirtree"
+version = "0.1.0"
+description = "A command-line tool for generating directory trees"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+    { name = "Jimmy Capecci" }
+]
+
+[project.scripts]
+dirtree = "dirtree.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

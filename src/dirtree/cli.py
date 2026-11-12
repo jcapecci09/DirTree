@@ -1,8 +1,14 @@
+"""Finds directory tree
+
+
+Author: Jimmy Capecci
+"""
+
 from pathlib import Path
 import argparse
 
 
-def get_directory_structure(path: str, depth: int = 0, max_depth: int = 3, show_hidden: bool = False) -> list[dict | str]:
+def get_directory_structure(path: Path, depth: int = 0, max_depth: int = 3, show_hidden: bool = False) -> list[dict | str]:
     """Gets the directory structure and stores it in a nested list/dictionary.
 
     :param path: Path to the directory being inspected
@@ -32,12 +38,12 @@ def get_directory_structure(path: str, depth: int = 0, max_depth: int = 3, show_
             # If the maximum depth has not been reached, recursively inspect the directory
             if depth < max_depth:
                 structure.append({
-                    item.name: get_directory_structure(item, depth + 1, max_depth)
+                    item.name: get_directory_structure(item, depth + 1, max_depth, show_hidden)
                 })
 
             # If the maximum depth has been reached, append only the directory name
             else:
-                structure.append(item.name)
+                structure.append({item.name: []})
 
     # Return the completed directory structure
     return structure
@@ -123,7 +129,7 @@ def main():
     # Set arguements for parser
     parser.add_argument('-i', '--input', help='directory path to find structure of', required=False, default=Path.cwd())
     parser.add_argument('-o', '--output', help='Output text file name', required=False, default='dir.txt')
-    parser.add_argument('-d', '--depth', help='Max Depth to find structure', required=False, default=2)
+    parser.add_argument('-d', '--depth', help='Max Depth to find structure', required=False, default=2, type=int)
     parser.add_argument('--print', required=False, action='store_true', help='Print to terminal')
     parser.add_argument('--show_hidden', required=False, action='store_true', help='Show hidden folders')
 
